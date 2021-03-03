@@ -70,7 +70,6 @@ class Wechat {
     })
   }
 
-  /**用来检测access_token是否有效的... */
   isValidAccessToken(data) {
     if (!data && !data.access_token && !data.expires_in) {
       //代表access_token无效的
@@ -89,54 +88,6 @@ class Wechat {
     return data.expires_in > Date.now();
   }
 
-  /**
-   * 获取没有过期的access_token
-   * @return {Promise<any>}
-   */
-  fetchAccessToken() {
-    // 优化
-    if (this.access_token && this.expires_in && this.fetchAccessToken(this)) {
-      // 说明之前保存过access_token, 并且它是有效的，直接使用
-      return Promise.resolve({
-        access_token: this.access_token,
-        expires_in: this.expires_in
-      })
-    }
-    // fetchAccessToken 的返回值
-    return this.readAccessToken()
-      .then(async res => {
-        // 本地有文件
-        // 判断它是否过期
-        if (this.isValidAccessToken(res)) {
-          return Promise.resolve(res)
-        } else {
-          // 过期了
-          // 发送请求获取access_token(getAccessToken)
-          const res = await this.getAccessToken()
-          // 保存下来(本地)(saveAccessToken)
-          await this.saveAccessToken(res)
-          // 将请求回来的access_token返回出去
-          return Promise.resolve(res)
-        }
-      })
-      .catch(async err => {
-        // 本地没有文件
-        // 发送请求获取access_token(getAccessToken)
-        const res = await this.getAccessToken()
-        // 保存下来(本地)(saveAccessToken)
-        await this.saveAccessToken(res)
-        // 将请求回来的access_token返回出去
-        resolve(res)
-      })
-      .then(res => {
-        // 将access_token挂载到this上
-        this.access_token = res.access_token
-        this.expires_in = res.expires_in
-        // 返回res包装了一层promise对象(此对象为成功的状态)
-        return Promise.resolve(res)
-      })
-  }
-
 
 
 
@@ -144,4 +95,31 @@ class Wechat {
 
 const w = new Wechat()
 
-
+new Promise((resolve, reject) => {
+  w.readAccessToken()
+    .then(res => {
+      // 本地有文件
+      if (w.isValidAccessToken(res)) {
+        resolve(res)
+      } else {
+        w.getAccessToken()
+          .then(res => {
+            w.saveAccessToken(res)
+              .then(() => {
+                resolve(res)
+              })
+          })
+      }
+    })
+    .catch(err => {
+      w.getAccessToken()
+        .then(res => {
+          w.saveAccessToken(res)
+            .then(() => {
+              resolve(res)
+            })
+        })
+    })
+}).then(res => {
+  console.log('res:', res)
+})
