@@ -329,16 +329,16 @@ class Wechat {
 }
 
 
-/*
+
 (async () => {
   //模拟测试
   const w = new Wechat();
   // //删除之前定义的菜单
-  // let result = await w.deleteMenu();
-  // console.log(result);
-  // //创建新的菜单
-  // result = await w.createMenu(menu);
-  // console.log(result);
+  let result = await w.deleteMenu();
+  console.log(result);
+  //创建新的菜单
+  result = await w.createMenu(menu);
+  console.log(result);
   /*
   
 
@@ -420,9 +420,9 @@ class Wechat {
   /*
   { media_id: '1_821D3VHxMTbMuZ5-DSoOy10ltRpTmm-WQdidLbyGI' }
    */
-  /*
+  
 })()
-*/
+
 
 
 module.exports = Wechat

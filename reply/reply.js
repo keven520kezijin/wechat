@@ -27,15 +27,21 @@ module.exports = message => {
     options.mediaId = message.MediaId
     console.log('picurl: ', message.PicUrl)
   } else if (message.MsgType === 'voice') {
-    options.msgType = 'voice'
-    options.mediaId = messageMediaId
+    // options.msgType = 'voice'
+    // options.mediaId = message.MediaId
+    content = message.Recognition
     console.log(message.Recognition)    
   } else if (message.MsgType === 'location') {
     content = `维度:${message.Location_X}-经度: ${message.Location_Y}-缩放大小: ${message.Scale}-位置信息: ${message.Label}`
   }  else if (message.MsgType === 'event') {
     if (message.Event === 'subscribe') {
       //用户订阅事件
-      content = '欢迎您的订阅~';
+      content = '欢迎您的订阅纪元链公众号~\n' + 
+      '回复 首页 查看硅谷电影预告片 \n' +
+      '回复 热门 查看最热门的电影 \n' +
+      '回复 文本 搜索电影信息 \n' +
+      '回复 语音 搜索电影信息 \n' +
+      '也可以点击下面菜单按钮，来了解纪元链电影公众号';
       if (message.EventKey) {
         //扫描带参数的二维码的订阅事件
         content = '欢迎您扫二维码的关注';
@@ -50,7 +56,12 @@ module.exports = message => {
       //用户进行会话时，上报一次地理位置消息
       content = '纬度：' + message.Latitude + ' 经度：' + message.Longitude + ' 精度：' + message.Precision;
     } else if (message.Event === 'CLICK') {
-      content = '点击了菜单~~~';
+      content = '您可以按照以下提示来进行操作~ \n' + 
+      '回复 首页 查看硅谷电影预告片 \n' +
+      '回复 热门 查看最热门的电影 \n' +
+      '回复 文本 搜索电影信息 \n' +
+      '回复 语音 搜索电影信息 \n' +
+      '也可以点击下面菜单按钮，来了解纪元链电影公众号';
     } else if (message.Event === 'VIEW') {
       //用户点击菜单，跳转到其他链接
       console.log('用户点击菜单，跳转到其他链接');
