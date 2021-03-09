@@ -330,98 +330,98 @@ class Wechat {
 
 
 
-(async () => {
-  //模拟测试
-  const w = new Wechat();
-  // //删除之前定义的菜单
-  let result = await w.deleteMenu();
-  console.log(result);
-  //创建新的菜单
-  result = await w.createMenu(menu);
-  console.log(result);
-  /*
+// (async () => {
+//   //模拟测试
+//   const w = new Wechat();
+//   // //删除之前定义的菜单
+//   let result = await w.deleteMenu();
+//   console.log(result);
+//   //创建新的菜单
+//   result = await w.createMenu(menu);
+//   console.log(result);
+//   /*
   
 
- / *
-  const data = await w.fetchTicket();
-  console.log(data);
-  // let data = await w.uploadTemporaryMaterial('image', '1.jpg');
-  // console.log(data);
-  // let data = await w.getTemporaryMaterial('image', 'JMXXcDqVgbI4UBdhEFi_qi_gM-g6Mo0Ib6hlIirP_79o86xjUlKFFmjCTzT5zoln', '2.jpg');
+//  / *
+//   const data = await w.fetchTicket();
+//   console.log(data);
+//   // let data = await w.uploadTemporaryMaterial('image', '1.jpg');
+//   // console.log(data);
+//   // let data = await w.getTemporaryMaterial('image', 'JMXXcDqVgbI4UBdhEFi_qi_gM-g6Mo0Ib6hlIirP_79o86xjUlKFFmjCTzT5zoln', '2.jpg');
   
-  // //上传图文素材中的图片
-  // let picUrl = await w.uploadPermanentMaterial('pic', '1.jpg');
-  // console.log(picUrl);
-  // // { url: 'http://mmbiz.qpic.cn/mmbiz_jpg/l6hEPf9t1fHG4DnabkDbTePmDZUGJlrb7Ughow3DXO4ALpNy9C5AE4BPCvqbbHibgcicZLqko2l7ib2POqc8wpzaA/0' }
-  // //上传图片获取mediaId
-  // let image = await w.uploadPermanentMaterial('image', '1.jpg');
-  // console.log(image);
-  // /*
-  // { media_id: '1_821D3VHxMTbMuZ5-DSoNzUaclsMflOOoDR-L0OHmA',
-  // url: 'http://mmbiz.qpic.cn/mmbiz_jpg/l6hEPf9t1fHG4DnabkDbTePmDZUGJlrb7Ughow3DXO4ALpNy9C5AE4BPCvqbbHibgcicZLqko2l7ib2POqc8wpzaA/0?wx_fmt=jpeg' }
-  //  */
-  // //上传图文素材
-  // const body = {
-  //   "articles": [
-  //     {
-  //       "title": '微信公众号开发',
-  //       "thumb_media_id": image.media_id,
-  //       "author": '佚名',
-  //       "digest": '这是微信公众号开发',
-  //       "show_cover_pic": 0,
-  //       "content": '<!DOCTYPE html>\n' +
-  //       '<html lang="en">\n' +
-  //       '<head>\n' +
-  //       '  <meta charset="UTF-8">\n' +
-  //       '  <meta name="viewport"\n' +
-  //       '        content="width =device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable = 0" />\n' +
-  //       '  <title>猜电影</title>\n' +
-  //       '</head>\n' +
-  //       '<body>\n' +
-  //       '  <div class="cover">\n' +
-  //       '    <button id="btn">点击开始录音</button>\n' +
-  //       '  </div>\n' +
-  // '        <div class="cover">\n' +
-  // '          <img src="' + picUrl.url + '" alt="肖申克的救赎" data-x="2000" data-y="2963" class="img-show" style="width: 100%;">\n' +
-  // '        </div>\n' +
-  //       '</body>\n' +
-  //       '</html>',
-  //       "content_source_url": 'http://www.atguigu.com'
-  //     },
-  //     {
-  //       "title": 'nodejs开发',
-  //       "thumb_media_id": image.media_id,
-  //       "author": '佚名',
-  //       "digest": '这是nodejs开发',
-  //       "show_cover_pic": 1,
-  //       "content": '<!DOCTYPE html>\n' +
-  //       '<html lang="en">\n' +
-  //       '<head>\n' +
-  //       '  <meta charset="UTF-8">\n' +
-  //       '  <meta name="viewport"\n' +
-  //       '        content="width =device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable = 0" />\n' +
-  //       '  <title>猜电影</title>\n' +
-  //       '</head>\n' +
-  //       '<body>\n' +
-  //       '  <div class="cover">\n' +
-  //       '    <button id="btn">点击开始录音</button>\n' +
-  //       '  </div>\n' +
-  //       '        <div class="cover">\n' +
-  //       '          <img src="' + picUrl.url + '" alt="肖申克的救赎" data-x="2000" data-y="2963" class="img-show" style="width: 100%;">\n' +
-  //       '        </div>\n' +
-  //       '</body>\n' +
-  //       '</html>',
-  //       "content_source_url": 'http://www.baidu.com'
-  //     }
-  //   ]
-  // }
-  // let data = await w.uploadPermanentMaterial('news', body);
-  // console.log(data);
-  /*
-  { media_id: '1_821D3VHxMTbMuZ5-DSoOy10ltRpTmm-WQdidLbyGI' }
-   */
+//   // //上传图文素材中的图片
+//   // let picUrl = await w.uploadPermanentMaterial('pic', '1.jpg');
+//   // console.log(picUrl);
+//   // // { url: 'http://mmbiz.qpic.cn/mmbiz_jpg/l6hEPf9t1fHG4DnabkDbTePmDZUGJlrb7Ughow3DXO4ALpNy9C5AE4BPCvqbbHibgcicZLqko2l7ib2POqc8wpzaA/0' }
+//   // //上传图片获取mediaId
+//   // let image = await w.uploadPermanentMaterial('image', '1.jpg');
+//   // console.log(image);
+//   // /*
+//   // { media_id: '1_821D3VHxMTbMuZ5-DSoNzUaclsMflOOoDR-L0OHmA',
+//   // url: 'http://mmbiz.qpic.cn/mmbiz_jpg/l6hEPf9t1fHG4DnabkDbTePmDZUGJlrb7Ughow3DXO4ALpNy9C5AE4BPCvqbbHibgcicZLqko2l7ib2POqc8wpzaA/0?wx_fmt=jpeg' }
+//   //  */
+//   // //上传图文素材
+//   // const body = {
+//   //   "articles": [
+//   //     {
+//   //       "title": '微信公众号开发',
+//   //       "thumb_media_id": image.media_id,
+//   //       "author": '佚名',
+//   //       "digest": '这是微信公众号开发',
+//   //       "show_cover_pic": 0,
+//   //       "content": '<!DOCTYPE html>\n' +
+//   //       '<html lang="en">\n' +
+//   //       '<head>\n' +
+//   //       '  <meta charset="UTF-8">\n' +
+//   //       '  <meta name="viewport"\n' +
+//   //       '        content="width =device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable = 0" />\n' +
+//   //       '  <title>猜电影</title>\n' +
+//   //       '</head>\n' +
+//   //       '<body>\n' +
+//   //       '  <div class="cover">\n' +
+//   //       '    <button id="btn">点击开始录音</button>\n' +
+//   //       '  </div>\n' +
+//   // '        <div class="cover">\n' +
+//   // '          <img src="' + picUrl.url + '" alt="肖申克的救赎" data-x="2000" data-y="2963" class="img-show" style="width: 100%;">\n' +
+//   // '        </div>\n' +
+//   //       '</body>\n' +
+//   //       '</html>',
+//   //       "content_source_url": 'http://www.atguigu.com'
+//   //     },
+//   //     {
+//   //       "title": 'nodejs开发',
+//   //       "thumb_media_id": image.media_id,
+//   //       "author": '佚名',
+//   //       "digest": '这是nodejs开发',
+//   //       "show_cover_pic": 1,
+//   //       "content": '<!DOCTYPE html>\n' +
+//   //       '<html lang="en">\n' +
+//   //       '<head>\n' +
+//   //       '  <meta charset="UTF-8">\n' +
+//   //       '  <meta name="viewport"\n' +
+//   //       '        content="width =device-width, initial-scale = 1.0, maximum-scale = 1.0, user-scalable = 0" />\n' +
+//   //       '  <title>猜电影</title>\n' +
+//   //       '</head>\n' +
+//   //       '<body>\n' +
+//   //       '  <div class="cover">\n' +
+//   //       '    <button id="btn">点击开始录音</button>\n' +
+//   //       '  </div>\n' +
+//   //       '        <div class="cover">\n' +
+//   //       '          <img src="' + picUrl.url + '" alt="肖申克的救赎" data-x="2000" data-y="2963" class="img-show" style="width: 100%;">\n' +
+//   //       '        </div>\n' +
+//   //       '</body>\n' +
+//   //       '</html>',
+//   //       "content_source_url": 'http://www.baidu.com'
+//   //     }
+//   //   ]
+//   // }
+//   // let data = await w.uploadPermanentMaterial('news', body);
+//   // console.log(data);
+//   /*
+//   { media_id: '1_821D3VHxMTbMuZ5-DSoOy10ltRpTmm-WQdidLbyGI' }
+//    */
   
-})()
+// })()
 
 
 
