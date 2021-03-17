@@ -1,8 +1,9 @@
 /*
   处理用户发送的消息类型和内容，决定返回不同的内容给用户
  */
-//引入rp
-module.exports = message => {
+//引入
+const Theaters = require('../db/model/Theaters')
+module.exports = async message => {
   let options = {
     toUserName: message.FromUserName,
     fromUserName: message.ToUserName,
@@ -18,6 +19,24 @@ module.exports = message => {
       content = '柯子衿520'
     } else if (message.Content === '3') {
       content = '蔡曼曼520'
+    } else if (message.Content === '热门') {
+      // 回复用户热门消息数据
+      // const data = Theaters.find()
+      // console.log('data: ', data)
+      // 回复内容初始化为空数组
+      content = []
+      options.msgType = 'news'
+      // 通过遍历将数据添加进去
+      for (var i = 0; i < 8; i++) {
+        // let item = data[i]
+        content.push({
+          title: "kv" + i,
+          description: "kv万岁万岁万万岁" + i,
+          picUrl: "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2655389824,2943968607&fm=26&gp=0.jpg",
+          url: 'http://www.epochain.cn/'
+        })
+      }
+      console.log('content: ', content)
     } else if (message.Content.match('爱')) {
       content = '想爱爱吗'
     }

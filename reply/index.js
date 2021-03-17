@@ -86,7 +86,7 @@ module.exports = () => {
 
       
 
-      const options = reply(message)
+      const options = await reply(message)
       console.log('options: ', options)
 
       // 最终回复用户的消息
